@@ -4,12 +4,6 @@ body {
   font-family: sans-serif;
 }
 
-.background {
-  background-color: red;
-  padding: 50px 0;
-  position: relative;
-}
-
 .center-text {
   text-align: center;
 }
@@ -61,7 +55,7 @@ body {
   bottom: 10px;
 }
 
-.answers {
+.answers-buttons {
   z-index: 10;
 }
 
