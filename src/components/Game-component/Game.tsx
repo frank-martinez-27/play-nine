@@ -10,6 +10,7 @@ class Game extends React.Component<myInterfaces.IgameProps, myInterfaces.IgameSt
     state = {
         selectedNumbers: [],
         randomNumberOfStars: 1 + Math.floor(Math.random() * 9),
+        answerIsCorrect: undefined,
     };
     selectNumber = (clickedNumber: never): void => {
         if (this.state.selectedNumbers.indexOf(clickedNumber) >= 0) { return; }
@@ -17,7 +18,19 @@ class Game extends React.Component<myInterfaces.IgameProps, myInterfaces.IgameSt
             selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
         }));
     }
+    unselectNumber = (clickedNumber: never): void => {
+        this.setState(prevState => ({
+            selectedNumbers: prevState.selectedNumbers.filter((sNumber: number) => sNumber !== clickedNumber)
+        }));
+    }
+    checkAnswer = (): void => {
+        this.setState(prevState => ({
+            answerIsCorrect: prevState.randomNumberOfStars ===
+            prevState.selectedNumbers.reduce((acc: number, n: number) => acc + n, 0)
+        }));
+    }
     render() {
+        const { selectedNumbers, randomNumberOfStars, answerIsCorrect } = this.state;
         return (
             <div>
                 <Container>
@@ -34,13 +47,18 @@ class Game extends React.Component<myInterfaces.IgameProps, myInterfaces.IgameSt
 
                                     <TitleComponent />
 
-                                    <StarsComponent numberOfStars={this.state.randomNumberOfStars} />
+                                    <StarsComponent numberOfStars={randomNumberOfStars} />
 
-                                    <AnswersComponent selectedNumbers={this.state.selectedNumbers} />
+                                    <AnswersComponent
+                                        selectedNumbers={selectedNumbers}
+                                        unselectNumber={this.unselectNumber}
+                                    />
 
                                     <ButtonsComponent
-                                        selectedNumbers={this.state.selectedNumbers}
+                                        selectedNumbers={selectedNumbers}
                                         selectNumber={this.selectNumber}
+                                        answerIsCorrect={answerIsCorrect}
+                                        checkAnswer={this.checkAnswer}
                                     />
 
                                 </div>

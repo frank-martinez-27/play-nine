@@ -11,10 +11,14 @@ class Answers extends React.Component<myInterfaces.IanswersProps, myInterfaces.I
                         <Col className="center-text pad-left-0 margin-top-5">
                             <span className="app-title">Your roll:</span><br />
                             {this.props.selectedNumbers.map(
-                                (sNumber: number, i: number) => 
-                                    <span key={i} className="rolled-number">{sNumber}</span>
-                            )};
-
+                                (sNumber: number, i: number) =>
+                                    <span
+                                        key={i}
+                                        className="rolled-number"
+                                        onClick={() => this.props.unselectNumber(sNumber)}
+                                    >{sNumber}
+                                    </span>
+                            )}
                         </Col>
                     </Row>
                 </Container>
