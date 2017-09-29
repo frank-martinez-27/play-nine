@@ -2,7 +2,14 @@ import * as React from 'react';
 import { Container, Col, Row, Button } from 'reactstrap';
 import './Buttons.css';
 
-class Buttons extends React.Component {
+class Buttons extends React.Component<myInterfaces.IbuttonsProps, myInterfaces.IbuttonsState> {
+    numbersList: Array<number> = Array.from({ length: (10 - 1) }, (v, k) => k + 1);
+    numberClassName = (sNumber: number) => {
+        if (this.props.selectedNumbers.indexOf(sNumber) >= 0) {
+            return 'rolled-number selected';
+        }
+        return 'rolled-number';
+    }
     render() {
         return (
             <div>
@@ -10,15 +17,16 @@ class Buttons extends React.Component {
                     <Row>
                         <Col className="center-text pad-left-0 margin-top-5">
                             <span className="app-title">Choose your numbers:</span><br />
-                            <span className="rolled-number">1</span>
-                            <span className="rolled-number">2</span>
-                            <span className="rolled-number">3</span>
-                            <span className="rolled-number">4</span>
-                            <span className="rolled-number">5</span>
-                            <span className="rolled-number">6</span>
-                            <span className="rolled-number">7</span>
-                            <span className="rolled-number">8</span>
-                            <span className="rolled-number">9</span>
+                            {this.numbersList.map(
+                                (sNumber, i) =>
+                                    <span
+                                        key={i}
+                                        className={this.numberClassName(sNumber)}
+                                        onClick={() => this.props.selectNumber(sNumber)}
+                                    >
+                                        {sNumber}
+                                    </span>
+                            )}
                         </Col>
                     </Row>
                 </Container>
