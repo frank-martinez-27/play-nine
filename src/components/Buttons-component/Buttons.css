@@ -21,7 +21,7 @@
 }
 
 .used {
-    background-color: #aaddaa;
+    background-color: #aaddaa !important;
     color: #99bb99;
     cursor: not-allowed !important;
 }

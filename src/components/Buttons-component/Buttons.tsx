@@ -7,6 +7,9 @@ class Buttons extends React.Component<myInterfaces.IbuttonsProps, myInterfaces.I
     myButton: JSX.Element;
     numbersList: Array<number> = Array.from({ length: (10 - 1) }, (v, k) => k + 1);
     numberClassName = (sNumber: number) => {
+        if (this.props.usedNumbers.indexOf(sNumber) >= 0) {
+            return 'rolled-number used';
+        }
         if (this.props.selectedNumbers.indexOf(sNumber) >= 0) {
             return 'rolled-number selected';
         }
@@ -21,6 +24,7 @@ class Buttons extends React.Component<myInterfaces.IbuttonsProps, myInterfaces.I
                         <Button
                             color="success"
                             className="confirm-button"
+                            onClick={this.props.acceptAnswer}
                         ><i className="fa fa-check" />
                         </Button>
                     );
@@ -74,7 +78,13 @@ class Buttons extends React.Component<myInterfaces.IbuttonsProps, myInterfaces.I
                     <Row>
                         <Col>
                             {generateButton}
-                            <Button color="warning" className="redraw-button">Redraw</Button>{' '}
+                            <Button
+                                color="warning"
+                                className="redraw-button"
+                                onClick={this.props.redraw}
+                                disabled={this.props.redraws === 0}
+                            >Redraw ({this.props.redraws})
+                            </Button>{' '}
                         </Col>
                     </Row>
                 </Container>
