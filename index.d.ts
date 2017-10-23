@@ -8,7 +8,8 @@ declare namespace myInterfaces {
         randomNumberOfStars: number;
         answerIsCorrect?: boolean;
         redraws: number;
-        doneStatus: string;
+        doneStatus?: string;
+        modal:boolean;
     }
     export interface IstarsProps {
         numberOfStars: number;

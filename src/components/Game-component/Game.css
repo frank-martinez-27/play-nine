@@ -1,0 +1,7 @@
+.modal.show .modal-dialog {
+    top: 50%;
+    transform: translate(0, -70%)!important;
+}
+.modal-btn{
+    width: auto !important;
+}
